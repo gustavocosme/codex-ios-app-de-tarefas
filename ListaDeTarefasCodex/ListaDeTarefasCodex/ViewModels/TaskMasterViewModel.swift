@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 /// Filtros disponíveis para a lista principal de tarefas.
 enum TaskCategoryFilter: String, CaseIterable, Identifiable {
