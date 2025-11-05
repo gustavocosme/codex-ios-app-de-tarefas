@@ -1,32 +1,21 @@
 //
-//  ListaDeTarefasCodexApp.swift
-//  ListaDeTarefasCodex
+//  TaskMasterApp.swift
+//  TaskMaster
 //
-//  Created by Gustavo Cosme on 05/11/25.
+//  Ponto de entrada da aplicação com o ViewModel compartilhado.
 //
 
 import SwiftUI
-import SwiftData
 
 @main
-struct ListaDeTarefasCodexApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+struct TaskMasterApp: App {
+    @StateObject private var viewModel = TaskMasterViewModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
+                .preferredColorScheme(viewModel.isDarkModeEnabled ? .dark : .light)
         }
-        .modelContainer(sharedModelContainer)
     }
 }
